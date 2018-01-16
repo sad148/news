@@ -79,11 +79,12 @@ class HomePage extends Component {
             page:1
         }
         this.setState({showLoader:true,newsData:[]})
-        this.formData();
+        let category = categories[tab.i];
+        const request = new Request('https://newsapi.org/v2/everything?sortBy=publishedAt&language=en&page=' + this.state.page++ + '&q=' + category,headers)
+        this.formData(request);
     }
 
     submitEditing = () => {
-        console.log("inside", this.state.searchText);
         Actions.push("search",{text:this.state.searchText});
     }
 
