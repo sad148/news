@@ -72,18 +72,6 @@ class Search extends Component {
     }
 
     render() {
-        let search = (
-            <TouchableHighlight
-
-            >
-                <View>
-                    <Icon
-                        name='search'
-                    />
-                    <TextInput></TextInput>
-                </View>
-            </TouchableHighlight>
-        )
         return (
             <View style={{flex:1,flexDirection: 'column'}}>
                 <SearchBar
@@ -92,32 +80,32 @@ class Search extends Component {
                     onChangeText = {this.searchTextChanged}
                     onSubmitEditing = {this.submitEditing}
                     placeholder='Type Here...' />
-                <View>
-                    <View>
-                        {(this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> :
-                            <FlatList
-                                data={this.state.newsData}
-                                renderItem={({item}) => (
-                                    <TouchableHighlight
-                                        onPress = {() => this.onPress(item)}
-                                        underLayColor="white"
-                                    >
-                                        <View>
-                                            <Card
-                                                title = {item.title}
-                                                image={{uri:item.urlToImage || 'http://www.blackbell.com.ng/ui/images/img_not_found.jpg'}}
-                                                imageProps={{resizeMode:"contain"}}
-                                            >
-                                                <Text style={{color:"maroon",fontSize:15,marginBottom:5}}>{item.author}({item.source.name})</Text>
-                                            </Card>
-                                        </View>
-                                    </TouchableHighlight>
-                                )}
-                                onEndReachedThreshold={0.5}
-                                onEndReached={this.endReached}
-                            />
-                        }
-                    </View>
+                <View style={{flex:2}}>
+                    {
+                        (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> :
+                        <FlatList
+                            data={this.state.newsData}
+                            renderItem={({item}) => (
+                                <TouchableHighlight
+                                    onPress = {() => this.onPress(item)}
+                                    underLayColor="transparent"
+                                >
+                                    <View>
+                                        <Card
+                                            title = {item.title}
+                                            image={{uri:item.urlToImage || 'http://www.blackbell.com.ng/ui/images/img_not_found.jpg'}}
+                                            imageProps={{resizeMode:"contain"}}
+                                            titleNumberOfLines = {2}
+                                        >
+                                            <Text style={{color:"maroon",fontSize:15,marginBottom:5}}>{item.author}({item.source.name})</Text>
+                                        </Card>
+                                    </View>
+                                </TouchableHighlight>
+                            )}
+                            onEndReachedThreshold={0.5}
+                            onEndReached={this.endReached}
+                        />
+                    }
                 </View>
             </View>
         )
