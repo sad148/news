@@ -221,6 +221,21 @@ class HomePage extends Component {
             />
         )
 
+        let translateView = (
+        <View>
+            <Text style={{fontSize:15, marginLeft:8, color:"black"}}>Translate to:</Text>
+            <Picker
+                selectedValue={this.state.language}
+                onValueChange={(itemValue) => this.changePicker(itemValue)}>
+                <Picker.Item label="English" value="en" />
+                <Picker.Item label="Hindi" value="hi" />
+                <Picker.Item label="Marathi" value="mr" />
+                <Picker.Item label="French" value="fr" />
+                <Picker.Item label="Gujarati" value="gu" />
+            </Picker>
+        </View>
+        )
+
         let drawerMenu = (
             <View style={{padding:10, marginTop:10}}>
                 <TouchableHighlight
@@ -232,22 +247,6 @@ class HomePage extends Component {
                     <View style={{borderColor:"lightgray", borderWidth:1}}></View>
                 </View>
                 </TouchableHighlight>
-                {/*<TouchableHighlight*/}
-                    {/*onPress = {this.showLanguages}*/}
-                {/*>*/}
-                {/*<View style={{"marginBottom":20}}>*/}
-                    {/*<Text style={{color:"white",fontSize:15,"marginBottom":20}}>Languages</Text>*/}
-                    {/*<View style={{borderColor:"lightgray", borderWidth:1}}></View>*/}
-                {/*</View>*/}
-                {/*</TouchableHighlight>*/}
-                {/*<TouchableHighlight*/}
-                    {/*onPress = {this.showCountries}*/}
-                {/*>*/}
-                {/*<View style={{"marginBottom":20}}>*/}
-                    {/*<Text style={{color:"white", fontSize:15,"marginBottom":20}}>Countries</Text>*/}
-                    {/*<View style={{borderColor:"lightgray", borderWidth:1}}></View>*/}
-                {/*</View>*/}
-                {/*</TouchableHighlight>*/}
             </View>
         )
 
@@ -288,50 +287,44 @@ class HomePage extends Component {
                                 tabBarUnderlineStyle={{height:2}}
                                 onChangeTab={this.tabChanged}
                             >
-                                <View tabLabel='Business'>{
+                                <View tabLabel='Business'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
-                                <View tabLabel='Entertainment'>{
+                                <View tabLabel='Entertainment'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
-                                <View tabLabel='General'>{
+                                <View tabLabel='General'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
-                                <View tabLabel='Health'>{
+                                <View tabLabel='Health'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
-                                <View tabLabel='Science'>{
+                                <View tabLabel='Science'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
-                                <View tabLabel='Sports'>{
+                                <View tabLabel='Sports'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
-                                <View tabLabel='Technology'>{
+                                <View tabLabel='Technology'>
+                                    {translateView}
+                                    {
                                     (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
                                 }</View>
                             </ScrollableTabView>
                         </View>
-                            {/*<View style={{flex:10}}>*/}
-
-                            {/*</View>*/}
                     </View>
-                    {/*<View style={styles.container}>*/}
-                        {/*<Tabs selected={this.state.page} style={{backgroundColor:'white'}}*/}
-                              {/*selectedStyle={{color:'red'}} onSelect={el=>this.setState({page:el.props.name})}>*/}
-                                {/*<Text style={{fontSize:15, marginLeft:8, color:"white"}}>Translate to:</Text>*/}
-                                {/*/!*<Picker*!/*/}
-                                    {/*/!*style={{color:"white"}}*!/*/}
-                                    {/*/!*selectedValue={this.state.language}*!/*/}
-                                    {/*/!*onValueChange={(itemValue) => this.changePicker(itemValue)}>*!/*/}
-                                    {/*/!*<Picker.Item label="English" value="en" />*!/*/}
-                                    {/*/!*<Picker.Item label="Hindi" value="hi" />*!/*/}
-                                    {/*/!*<Picker.Item label="Marathi" value="mr" />*!/*/}
-                                    {/*/!*<Picker.Item label="French" value="fr" />*!/*/}
-                                    {/*/!*<Picker.Item label="Gujarati" value="gu" />*!/*/}
-                                {/*/!*</Picker>*!/*/}
-                            {/*<Text>Publication</Text>*/}
-                        {/*</Tabs>*/}
-                    {/*</View>*/}
                     <View>
                         <Text style={{alignSelf:'center',fontSize:15}}>Powered by NewsAPI.org</Text>
                     </View>
