@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-import {View, Text, StyleSheet, FlatList, Platform, Dimensions, Image, TouchableHighlight} from 'react-native'
-import { Avatar, Header } from 'react-native-elements'
+import {View, Text, FlatList, Image, TouchableHighlight} from 'react-native'
+import { Header, Icon } from 'react-native-elements'
 import {Actions} from 'react-native-router-flux'
 const headers = { method: 'GET',
     headers: {
@@ -24,13 +24,6 @@ const publicationMap = {
     "br":"https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png"
 }
 
-const styles = StyleSheet.create({
-    list: {
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent:'space-between'
-    }
-});
 
 class Publications extends Component {
     state = {
@@ -78,11 +71,27 @@ class Publications extends Component {
         Actions.push("publishernews",{publisher:pubId})
     }
 
+    goBack = () => {
+        Actions.pop();
+    }
+
     render = () => {
+
+        let backButton = (
+            <Icon
+                name='ios-arrow-back'
+                type='ionicon'
+                color={"white"}
+                onPress = {this.goBack}
+                underlayColor={"transparent"}
+            />
+        )
+
         return (
             <View>
                 <Header
                     outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
+                    leftComponent={backButton}
                     centerComponent={{ text: 'Publications', style: { color: '#fff',fontSize:20 } }}
                 />
 

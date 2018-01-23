@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Image, View, FlatList, TouchableHighlight, ActivityIndicator, ToastAndroid, Picker, StatusBar, Platform, Dimensions, Linking, StyleSheet } from 'react-native';
 import {Actions} from 'react-native-router-flux'
+import ModalDropdown from 'react-native-modal-dropdown';
 import ScrollableTabView, {ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import { Header, SearchBar } from 'react-native-elements'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
@@ -43,6 +44,14 @@ const categories = {
     4:"science",
     5:"sports",
     6:"technology"
+}
+
+const languageMap = {
+    "English":'en',
+    "Hindi":'hi',
+    "Marathi":'mr',
+    "French":'fr',
+    "Gujarati":'gu'
 }
 
 class HomePage extends Component {
@@ -88,20 +97,18 @@ class HomePage extends Component {
     }
 
 
-    changePicker = (language) => {
+    changePicker = (position, language) => {
+        language = languageMap[language]
         let newsData = this.state.newsData
         this.setState({language:language, newsData:[], showLoader:true})
         if(Platform.OS == "android")
             ToastAndroid.show('Translating...',3000,"BOTTOM")
         let category = categories[this.state.categorySelected];
         let data = []
-        console.log(this.state.q,language);
         translate.translate(this.state.q,language,(resp) => {
             newsData.map((item, index) => {
-                console.log(item.title,resp[index].title);
                 return item.title = resp[index]
             })
-            console.log(newsData);
             this.setState({newsData:newsData, showLoader:false})
         })
 
@@ -208,6 +215,7 @@ class HomePage extends Component {
         let search = (
                 <Icon
                     name='search'
+                    underlayColor={"transparent"}
                     color="white"
                     onPress = {this.showSearchbar}
                 />
@@ -216,6 +224,7 @@ class HomePage extends Component {
         let hamburger = (
             <Icon
                 name='menu'
+                underlayColor={"transparent"}
                 color="white"
                 onPress = {this.openControlPanel}
             />
@@ -223,16 +232,14 @@ class HomePage extends Component {
 
         let translateView = (
         <View>
-            <Text style={{fontSize:15, marginLeft:8, color:"black"}}>Translate to:</Text>
-            <Picker
-                selectedValue={this.state.language}
-                onValueChange={(itemValue) => this.changePicker(itemValue)}>
-                <Picker.Item label="English" value="en" />
-                <Picker.Item label="Hindi" value="hi" />
-                <Picker.Item label="Marathi" value="mr" />
-                <Picker.Item label="French" value="fr" />
-                <Picker.Item label="Gujarati" value="gu" />
-            </Picker>
+            <ModalDropdown options={['English','Marathi','French','Hindi','Gujarati']}
+                defaultValue="Translate"
+                onSelect = {this.changePicker}
+                           style={{borderWidth:1, width:"20%",borderRadius:10, backgroundColor:"#0F084B",marginTop:5,marginLeft:3}}
+                dropdownStyle = {{width:"50%",color:"black"}}
+                           textStyle = {{fontSize:13, color:"white",alignSelf:"center"}}
+                           dropdownTextStyle = {{fontSize:13, color:"black"}}
+            />
         </View>
         )
 
@@ -265,7 +272,7 @@ class HomePage extends Component {
                     />
                     <View style={{flex:1}}>
                         <Header
-                            outerContainerStyles={{height:45,backgroundColor:"#0F084B"}}
+                            outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
                             leftComponent={hamburger}
                             centerComponent={{ text: 'Headlines', style: { color: '#fff',fontSize:17 }}}
                             rightComponent={search}
@@ -279,7 +286,7 @@ class HomePage extends Component {
                                 placeholder='Type Here...' /> : <View></View>
                         }
 
-                        <View style={{flex:2}}>
+                        <View style={{flex:3}}>
                             <ScrollableTabView
                                 initialPage={0}
                                 renderTabBar={() => <ScrollableTabBar />}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, TouchableHighlight, ActivityIndicator } from 'react-native';
 import {Actions} from 'react-native-router-flux'
-import { Header, Card } from 'react-native-elements'
+import { Header, Card, Icon } from 'react-native-elements'
 
 const headers = { method: 'GET',
     headers: {
@@ -36,11 +36,26 @@ class PublicationNews extends Component {
             })
     }
 
+    goBack = () => {
+        Actions.pop();
+    }
+
     onPress = (item) => {
         Actions.push("description",{item:item,language:'en'});
     }
 
     render() {
+
+        let backButton = (
+            <Icon
+                name='ios-arrow-back'
+                type='ionicon'
+                color={"white"}
+                onPress = {this.goBack}
+                underlayColor={"transparent"}
+            />
+        )
+
         return (
                 <View style={{flex:1}}>
                     <Header

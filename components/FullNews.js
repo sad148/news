@@ -1,6 +1,7 @@
 import React,{Component} from 'react'
 import {View, Text, Image, ActivityIndicator} from 'react-native'
-import { SearchBar, Header } from 'react-native-elements'
+import {Actions} from 'react-native-router-flux'
+import { SearchBar, Header, Icon } from 'react-native-elements'
 var translate = require('../actions/translate')
 
 class FullNews extends Component {
@@ -15,11 +16,27 @@ class FullNews extends Component {
         })
     }
 
+    goBack = () => {
+        Actions.pop();
+    }
+
     render = () => {
+
+        let backButton = (
+            <Icon
+                name='ios-arrow-back'
+                type='ionicon'
+                color={"white"}
+                onPress = {this.goBack}
+                underlayColor={"transparent"}
+            />
+        )
+
         return (
             <View>
                 <Header
-                    outerContainerStyles={{height:45,backgroundColor:"#0F084B"}}
+                    outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
+                    leftComponent={backButton}
                     centerComponent={{ text: 'News', style: { color: '#fff',fontSize:17 }}}
                 />
                 {
