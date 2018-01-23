@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text, Image, View, FlatList, TouchableHighlight, ActivityIndicator, ToastAndroid, Picker, StatusBar, Platform, Dimensions, Linking } from 'react-native';
+import { Text, Image, View, FlatList, TouchableHighlight, ActivityIndicator, ToastAndroid, Picker, StatusBar, Platform, Dimensions, Linking, StyleSheet } from 'react-native';
 import {Actions} from 'react-native-router-flux'
 import ScrollableTabView, {ScrollableTabBar, } from 'react-native-scrollable-tab-view';
 import { Header, SearchBar } from 'react-native-elements'
 import { Card, ListItem, Button, Icon } from 'react-native-elements'
 import Drawer from 'react-native-drawer'
+import Tabs from 'react-native-tabs';
 var translate = require('../actions/translate')
 const headers = { method: 'GET',
     headers: {
@@ -14,6 +15,25 @@ const headers = { method: 'GET',
 const drawerStyles = {
     drawer: { backgroundColor:"#0F084B"}
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
+    instructions: {
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+    },
+});
+
 
 const categories = {
     0:"business",
@@ -30,6 +50,7 @@ class HomePage extends Component {
         newsData:[],
         language:'en',
         totalResults:0,
+        render:[],
         page:1,
         categorySelected:0,
         count:0,
@@ -102,6 +123,7 @@ class HomePage extends Component {
                             return this.state.newsData[index].title = resp[index]
                         })
                         this.setState({newsData:this.state.newsData, showLoader:false})
+                        this.tabview(this.state.newsData);
                     })
                 } else {
                     console.log("no data");
@@ -110,6 +132,41 @@ class HomePage extends Component {
             .catch((error) => {
                 console.log("error", error);
             })
+    }
+
+    tabview = (data) => {
+           this.setState({
+                render:(
+                    <View>
+                    <FlatList
+                        data={data}
+                        renderItem={({item}) => (
+                            <TouchableHighlight
+                                onPress={() => this.onPress(item)}
+                                underLayColor="transparent"
+                            >
+                                <View>
+                                    <Card
+                                        title={item.title}
+                                        image={{uri: item.urlToImage || 'http://www.blackbell.com.ng/ui/images/img_not_found.jpg'}}
+                                        imageProps={{resizeMode: "contain"}}
+                                        wrapperStyle={{shadowColor: "red"}}
+                                        containerStyle={{shadowColor: "red"}}
+                                        titleNumberOfLines={2}
+                                    >
+                                        <Text style={{
+                                            color: "maroon",
+                                            fontSize: 15,
+                                            marginBottom: 5
+                                        }}>{item.author}({item.source.name})</Text>
+                                    </Card>
+                                </View>
+                            </TouchableHighlight>
+                        )}
+                    />
+                    </View>)
+            })
+
     }
 
     onPress = (item) => {
@@ -231,52 +288,50 @@ class HomePage extends Component {
                                 tabBarUnderlineStyle={{height:2}}
                                 onChangeTab={this.tabChanged}
                             >
-                                <Text tabLabel='Business'></Text>
-                                <Text tabLabel='Entertainment'></Text>
-                                <Text tabLabel='General'></Text>
-                                <Text tabLabel='Health'></Text>
-                                <Text tabLabel='Science'></Text>
-                                <Text tabLabel='Sports'></Text>
-                                <Text tabLabel='Technology'></Text>
+                                <View tabLabel='Business'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
+                                <View tabLabel='Entertainment'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
+                                <View tabLabel='General'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
+                                <View tabLabel='Health'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
+                                <View tabLabel='Science'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
+                                <View tabLabel='Sports'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
+                                <View tabLabel='Technology'>{
+                                    (this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> : this.state.render
+                                }</View>
                             </ScrollableTabView>
-                            <Text style={{fontSize:15, marginLeft:8, color:"black"}}>Translate to:</Text>
-                            <Picker
-                                selectedValue={this.state.language}
-                                onValueChange={(itemValue) => this.changePicker(itemValue)}>
-                                <Picker.Item label="English" value="en" />
-                                <Picker.Item label="Hindi" value="hi" />
-                                <Picker.Item label="Marathi" value="mr" />
-                                <Picker.Item label="French" value="fr" />
-                                <Picker.Item label="Gujarati" value="gu" />
-                            </Picker>
                         </View>
-                            <View style={{flex:10}}>
-                                {(this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> :
-                                    <FlatList
-                                        data={this.state.newsData}
-                                        renderItem={({item}) => (
-                                            <TouchableHighlight
-                                                onPress = {() => this.onPress(item)}
-                                                underLayColor="transparent"
-                                            >
-                                            <View>
-                                               <Card
-                                                    title = {item.title}
-                                                    image={{uri:item.urlToImage || 'http://www.blackbell.com.ng/ui/images/img_not_found.jpg'}}
-                                                    imageProps={{resizeMode:"contain"}}
-                                                    wrapperStyle={{shadowColor:"red"}}
-                                                    containerStyle={{shadowColor:"red"}}
-                                                    titleNumberOfLines = {2}
-                                               >
-                                                   <Text style={{color:"maroon",fontSize:15,marginBottom:5}}>{item.author}({item.source.name})</Text>
-                                                </Card>
-                                            </View>
-                                            </TouchableHighlight>
-                                        )}
-                                    />
-                                }
-                            </View>
+                            {/*<View style={{flex:10}}>*/}
+
+                            {/*</View>*/}
                     </View>
+                    {/*<View style={styles.container}>*/}
+                        {/*<Tabs selected={this.state.page} style={{backgroundColor:'white'}}*/}
+                              {/*selectedStyle={{color:'red'}} onSelect={el=>this.setState({page:el.props.name})}>*/}
+                                {/*<Text style={{fontSize:15, marginLeft:8, color:"white"}}>Translate to:</Text>*/}
+                                {/*/!*<Picker*!/*/}
+                                    {/*/!*style={{color:"white"}}*!/*/}
+                                    {/*/!*selectedValue={this.state.language}*!/*/}
+                                    {/*/!*onValueChange={(itemValue) => this.changePicker(itemValue)}>*!/*/}
+                                    {/*/!*<Picker.Item label="English" value="en" />*!/*/}
+                                    {/*/!*<Picker.Item label="Hindi" value="hi" />*!/*/}
+                                    {/*/!*<Picker.Item label="Marathi" value="mr" />*!/*/}
+                                    {/*/!*<Picker.Item label="French" value="fr" />*!/*/}
+                                    {/*/!*<Picker.Item label="Gujarati" value="gu" />*!/*/}
+                                {/*/!*</Picker>*!/*/}
+                            {/*<Text>Publication</Text>*/}
+                        {/*</Tabs>*/}
+                    {/*</View>*/}
                     <View>
                         <Text style={{alignSelf:'center',fontSize:15}}>Powered by NewsAPI.org</Text>
                     </View>
