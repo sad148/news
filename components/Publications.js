@@ -9,19 +9,14 @@ const headers = { method: 'GET',
 
 const publicationMap = {
     'abc-news':"https://i.vimeocdn.com/portrait/5584804_300x300",
-    'bbc-news':"http://m.files.bbci.co.uk/modules/bbc-morph-news-waf-page-meta/2.0.0/bbc_news_logo.png",
-    'bbc-sport':"http://www.mikecaine.com/wp-content/uploads/2017/05/Logo-BBC-Sport.jpg",
+'bbc-news':"https://www.thewrap.com/wp-content/uploads/2014/07/bbc-news-logo.jpg",    
+'bbc-sport':"https://m.files.bbci.co.uk/modules/bbc-morph-sport-opengraph/1.1.1/images/bbc-sport-logo.png",
     'hacker-news':"https://prod-marketing-greenhouse.global.ssl.fastly.net/blog-assets/hackernews.png?mtime=20160407112052",
     'mtv-news':"https://pmcvariety.files.wordpress.com/2017/06/mtv-news.jpg?w=1000&h=563&crop=1",
     'cnbc':"https://lh3.googleusercontent.com/z1UDoxRq7-yLISA0gYHYjbxygwTFGQrEe84Tvu9sRi8fA8nmb6MGRu0hU-BJx1i2rdI=w300",
-    'nfl-news':"http://umlconnector.com/wp-content/uploads/shield.jpg",
+    'nfl-news':"https://i.axs.com/2015/11/promoted-media-optimized_565a48f275df8.jpg",
     'nhl-news':"https://i.ytimg.com/vi/BCjLYVuLE88/maxresdefault.jpg",
     'independent':"https://static.independent.co.uk/s3fs-public/styles/article_small/public/thumbnails/image/2017/06/02/11/independent-logo-eagle.png",
-    "fr":"https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Flag_of_France.svg/1280px-Flag_of_France.svg.png",
-    "us":"https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png",
-    "in":"https://www.worldmapmaker.com/pix/flags_600/india.gif",
-    "sa":"https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Flag_of_South_Africa.svg/2000px-Flag_of_South_Africa.svg.png",
-    "br":"https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png"
 }
 
 
@@ -110,7 +105,7 @@ class Publications extends Component {
                                     <Image style={{
                                         width: 100,
                                         height: 100,
-                                        borderRadius:100
+                                        borderRadius:50
                                     }} source={{uri: item.image}} />
                                 <Text style={{alignSelf:"center", marginTop:5, marginBottom:5, fontSize:15, color:"maroon", marginRight:30}}>{item.name}</Text>
                             </View>
