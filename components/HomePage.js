@@ -215,6 +215,7 @@ class HomePage extends Component {
                     name='search'
                     underlayColor={"transparent"}
                     color="white"
+                    marginTop={50}
                     onPress = {this.showSearchbar}
                 />
         )
@@ -270,7 +271,7 @@ class HomePage extends Component {
                     />
                     <View style={{flex:1}}>
                         <Header
-                            outerContainerStyles={{height:60,backgroundColor:"#0F084B”}}
+                            outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
                             leftComponent={hamburger}
                             centerComponent={{ text: 'Headlines', style: { color: '#fff',fontSize:17 }}}
                             rightComponent={search}
