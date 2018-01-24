@@ -60,7 +60,8 @@ class PublicationNews extends Component {
                 <View style={{flex:1}}>
                     <Header
                         outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
-                        centerComponent={{ text: 'Publication News', style: { color: '#fff',fontSize:20 } }}
+                        leftComponent={backButton}
+                        centerComponent={{ text: 'Publication News', style: { color: '#fff',fontSize:17 } }}
                     />
                     <View style={{flex:2}}>
                         {(this.state.showLoader == true) ? <ActivityIndicator size="large" color="#0000ff"/> :

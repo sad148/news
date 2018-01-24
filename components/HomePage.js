@@ -157,8 +157,6 @@ class HomePage extends Component {
                                         title={item.title}
                                         image={{uri: item.urlToImage || 'http://www.blackbell.com.ng/ui/images/img_not_found.jpg'}}
                                         imageProps={{resizeMode: "contain"}}
-                                        wrapperStyle={{shadowColor: "red"}}
-                                        containerStyle={{shadowColor: "red"}}
                                         titleNumberOfLines={2}
                                     >
                                         <Text style={{

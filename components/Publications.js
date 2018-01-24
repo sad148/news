@@ -92,7 +92,7 @@ class Publications extends Component {
                 <Header
                     outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
                     leftComponent={backButton}
-                    centerComponent={{ text: 'Publications', style: { color: '#fff',fontSize:20 } }}
+                    centerComponent={{ text: 'Publications', style: { color: '#fff',fontSize:17 } }}
                 />
 
                 <View>
