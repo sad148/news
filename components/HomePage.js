@@ -242,7 +242,7 @@ class HomePage extends Component {
         )
 
         let drawerMenu = (
-            <View style={{padding:10, marginTop:10}}>
+            <View style={{padding:10, marginTop:20}}>
                 <TouchableHighlight
                     onPress = {this.showPublications}
                     underlayColor = "transparent"
@@ -270,7 +270,7 @@ class HomePage extends Component {
                     />
                     <View style={{flex:1}}>
                         <Header
-                            outerContainerStyles={{height:60,backgroundColor:"#0F084B"}}
+                            outerContainerStyles={{height:60,backgroundColor:"#0F084B”}}
                             leftComponent={hamburger}
                             centerComponent={{ text: 'Headlines', style: { color: '#fff',fontSize:17 }}}
                             rightComponent={search}
